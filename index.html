@@ -99,6 +99,7 @@ function getinfo() {
 		} else if(textType == "contatoemail"){
 			secondPart = "seu filho ";
 			thirdPart = " ele ";
+			fourthPart = " do"
 		}
 	} else{
 		if (textType == "matricula") {
@@ -111,6 +112,7 @@ function getinfo() {
 		} else if(textType == "contatoemail"){
 			secondPart = "sua filha ";
 			thirdPart = " ela ";
+			fourthPart = " da"
 		}
 	}
 	if ($('input[name=phaseSon]:checked').val() == 0) {
@@ -151,7 +153,7 @@ function getinfo() {
 		
 		obj.html(obj.html().replace(/\n/g,'<br/>'));
 	} else if(textType == "contatoemail"){
-		titleText = "Agendamento " + secondPart + $("#nameSon").val() + " na Escola de programação e robótica SuperGeeks";
+		titleText = "Agendamento " + fourthPart + $("#nameSon").val() + " na Escola de programação e robótica SuperGeeks";
 		$("#titleGenerated").text(titleText);
 		
 		var obj = $("#textGenerated").text(textContatoEmail);
