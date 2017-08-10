@@ -1,7 +1,134 @@
 <!DOCTYPE html>
 <html>
+<style type="text/css">
+form{
+	margin-top: 50px;
+}
+</style>
+<head>
+<link rel="shortcut icon" href="https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/27000106947/fav_icon/MX5tLgQaf9-u7ecnIlSoacpxHPv0U3nveQ.png">
+<title>SuperGeeks Manaus - Gerador de Texto!</title>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<div class="container">
+<div style="text-align: center; margin-top: 20px">
+<img src="https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/27000106946/logo/ICqmNTvVq_G-HnhI7BCIdktR0tfctXvCtw.png">
+</div>
+<form action="">
+<div class="row">
+	<div class="col-sm-2">
+		<input type="radio" name="textType" value="matricula"> Matrícula
+	</div>
+	<div class="col-sm-2">
+		<input type="radio" name="textType" value="posdemonstrativa"> Contato Pós Aula Demonstrativa
+	</div>
+	<div class="col-sm-2">
+		<input type="radio" name="textType" value="agendamento"> Confirmação de Agendamento
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-5" style="text-align:right;">Nome do responsável:</div>
+	<div class="col-sm-6" ><input id="nameParent" type="text" name="responsavel"></div>
+</div>
+<div class="row">
+	<div class="col-sm-5" style="text-align: right;"><input type="radio" name="genderParent" value="male"> Masculino<br></div>
+	<div class="col-sm-2"><input type="radio" name="genderParent" value="female"> Feminino<br></div>
+</div>
+<br><br>
+<div class="row">
+<div class="col-sm-5" style="text-align: right;"><p>Nome do filho:</p></div>
+<div class="col-sm-6"><input id="nameSon" type="text" name="filho"></div>
+</div>
+<div class="row">
+	<div class="col-sm-5" style="text-align: right;"><input type="radio" name="genderSon" value="male"> Masculino<br></div>
+	<div class="col-sm-2"><input type="radio" name="genderSon" value="female"> Feminino<br></div>
+</div>
+<br><br>
+<div>
+	<div class="row">
+		<div class="col-sm-5" style="text-align: right;"><p>Fase do aluno</p></div>
+		<div class="col-sm-1"><input type="radio" name="phaseSon" value="0"> Fase 0<br></div>
+		<div class="col-sm-1"><input type="radio" name="phaseSon" value="1"> Fase 1<br></div>
+	</div>
+</div>
+<br>
+<div class="col-sm-6" style="text-align: right;">
+	<button class="btn btn-danger" type="button" onclick="getinfo()" name="gerarTexto">Gerar Texto  </button>
+</div>
+<br><br>
+<div style="margin-left: 100px;">
+	<h1 id="titleGenerated"></h1>
+	<span id="textGenerated"></span>
+</div>
+</form>
+
+</div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+
+
+function getinfo() {
+var firstPart = "";
+var secondPart = "";
+var thirdPart = "";
+var fourthPart = "";
+var phaseLink = "";
+var textType = $('input[name=textType]:checked').val();
+
+if ($('input[name=genderParent]:checked').val() == "male"){
+	firstPart = "Sr. ";
+} else{
+	firstPart = "Sra. ";
+}
+if ($('input[name=genderSon]:checked').val() == "male"){
+	if (textType == "matricula") {
+		secondPart = "do seu filho ";
+		thirdPart = "do aluno ";
+	} else if(textType == "posdemonstrativa"){
+		secondPart = "seu filho ";
+		thirdPart = " ele ";
+		fourthPart = " matricula-lo, ";
+	}
+} else{
+	if (textType == "matricula") {
+		secondPart = "da sua filha ";
+		thirdPart = "da aluna ";
+	} else if(textType == "posdemonstrativa"){
+		secondPart = "sua filha ";
+		thirdPart = " ela ";
+		fourthPart = " matricula-la, ";
+	}
+}
+if ($('input[name=phaseSon]:checked').val() == 0) {
+	phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=1"
+} else{
+	phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=2"
+}
+
+var textMatricula = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\nSegue a baixo o link da matrícula " + secondPart +
+$("#nameSon").val() + "\nLink da matrícula da Fase " + $('input[name=phaseSon]:checked').val() + " " + phaseLink +"\n"+
+"Qualquer dúvida entrar em contato com a escola no número: 3877-9798, 98404-7475, 98405-2317\n";
+
+var textPosAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n\nO " + secondPart + $("#nameSon").val() +
+	" fez uma aula demonstrativa e nós da SuperGeeks gostariamos de saber se " + thirdPart + "gostou?\nCaso haja alguma dúvida, ou interesse de" + fourthPart +
+	"por favor entrar em contato no número: 3877-9798, 98404-7475, 98405-2317\n";
+
+var titleMatricula = "Link da matricula " + thirdPart + nameSon;
+
+$("#titleGenerated").text(titleMatricula);
+var obj = $("#textGenerated").text(textMatricula);
+obj.html(obj.html().replace(/\n/g,'<br/>'));
+
+}
+
+
+</script>
 </html>
