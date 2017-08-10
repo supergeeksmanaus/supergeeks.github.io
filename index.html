@@ -85,7 +85,9 @@ function getinfo() {
 	var titleText = "";
 	if ($('input[name=genderParent]:checked').val() == "male"){
 		firstPart = "Sr. ";
+		fifthPart = "O ";
 	} else{
+		fifthPart = "A ";
 		firstPart = "Sra. ";
 	}
 	if ($('input[name=genderSon]:checked').val() == "male"){
@@ -130,7 +132,7 @@ function getinfo() {
 		"por favor entrar em contato nos números: 3877-9798, 98404-7475, 98405-2317\n";
 
 	var textContatoEmail = "Olá " + firstPart + $("#nameParent").val() + ",\n" +
-							"A " + firstPart + " cadastrou " + secondPart + $("#nameSon").val() + " para uma aula demonstrativa gratuita em nossa escola, " +
+							fifthPart + firstPart + " cadastrou " + secondPart + $("#nameSon").val() + " para uma aula demonstrativa gratuita em nossa escola, " +
 							"SuperGeeks, nós acabamos de inaugurar, devido a grande procura estamos entrando em contato para fazer o agendamento." + 
 							" Por favor nos ligue nos números: 3877-9798, 98404-7475, 98405-2317\n" 
 
