@@ -16,17 +16,14 @@ form{
 </div>
 <form action="">
 <div class="row">
-	<div class="col-sm-2">
+	<div class="col-sm-5" style="text-align: right;">
 		<input type="radio" name="textType" value="matricula"> Matrícula
 	</div>
-	<div class="col-sm-2">
+	<div class="col-sm-3">
 		<input type="radio" name="textType" value="posdemonstrativa"> Contato Pós Aula Demonstrativa
 	</div>
-	<div class="col-sm-2">
-		<input type="radio" name="textType" value="agendamento"> Confirmação de Agendamento
-	</div>
 </div>
-<div class="row">
+<div class="row" style="margin-top: 20px">
 	<div class="col-sm-5" style="text-align:right;">Nome do responsável:</div>
 	<div class="col-sm-6" ><input id="nameParent" type="text" name="responsavel"></div>
 </div>
@@ -57,7 +54,7 @@ form{
 </div>
 <br><br>
 <div style="margin-left: 100px;">
-	<h1 id="titleGenerated"></h1>
+	<h3 id="titleGenerated"></h3>
 	<span id="textGenerated"></span>
 </div>
 </form>
@@ -82,7 +79,7 @@ var thirdPart = "";
 var fourthPart = "";
 var phaseLink = "";
 var textType = $('input[name=textType]:checked').val();
-
+var titleText = "";
 if ($('input[name=genderParent]:checked').val() == "male"){
 	firstPart = "Sr. ";
 } else{
@@ -117,15 +114,31 @@ var textMatricula = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n
 $("#nameSon").val() + "\nLink da matrícula da Fase " + $('input[name=phaseSon]:checked').val() + " " + phaseLink +"\n"+
 "Qualquer dúvida entrar em contato com a escola no número: 3877-9798, 98404-7475, 98405-2317\n";
 
-var textPosAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n\nO " + secondPart + $("#nameSon").val() +
+var textPosAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\nO " + secondPart + $("#nameSon").val() +
 	" fez uma aula demonstrativa e nós da SuperGeeks gostariamos de saber se " + thirdPart + "gostou?\nCaso haja alguma dúvida, ou interesse de" + fourthPart +
 	"por favor entrar em contato no número: 3877-9798, 98404-7475, 98405-2317\n";
 
-var titleMatricula = "Link da matricula " + thirdPart + nameSon;
 
-$("#titleGenerated").text(titleMatricula);
-var obj = $("#textGenerated").text(textMatricula);
-obj.html(obj.html().replace(/\n/g,'<br/>'));
+if (textType == "matricula") {
+	titleText = "Link da matricula " + thirdPart + $("#nameSon").val();
+	
+	$("#titleGenerated").text(titleText);
+	
+	var obj = $("#textGenerated").text(textMatricula);
+	
+	obj.html(obj.html().replace(/\n/g,'<br/>'));
+
+} else if (textType == "posdemonstrativa") {
+	
+	titleText = "Escola de programação e robótica SuperGeeks";
+	
+	$("#titleGenerated").text(titleText);
+	
+	var obj = $("#textGenerated").text(textPosAgendamento);
+	
+	obj.html(obj.html().replace(/\n/g,'<br/>'));
+}
+
 
 }
 
