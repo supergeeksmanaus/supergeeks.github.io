@@ -73,7 +73,7 @@ footer{
 </div>
 </body>
 <footer>
-	v0.9a
+	v0.1b
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -109,6 +109,7 @@ function getinfo() {
 			secondPart = "seu filho ";
 			thirdPart = " ele ";
 			fourthPart = " matricula-lo, ";
+			sixthParth = "O ";
 		} else if(textType == "contatoemail"){
 			secondPart = "seu filho ";
 			thirdPart = " ele ";
@@ -122,6 +123,7 @@ function getinfo() {
 			secondPart = "sua filha ";
 			thirdPart = " ela ";
 			fourthPart = " matricula-la, ";
+			sixthParth = "A ";
 		} else if(textType == "contatoemail"){
 			secondPart = "sua filha ";
 			thirdPart = " ela ";
@@ -138,7 +140,7 @@ function getinfo() {
 	$("#nameSon").val() + "\nLink da matrícula da Fase " + $('input[name=phaseSon]:checked').val() + " " + phaseLink +"\n"+
 	"Qualquer dúvida entrar em contato com a escola nos números: 3877-9798, 98404-7475, 98405-2317\n";
 
-	var textPosAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n"+ fifthPart + secondPart + $("#nameSon").val() +
+	var textPosAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n"+ sixthParth + secondPart + $("#nameSon").val() +
 		" fez uma aula demonstrativa e nós da SuperGeeks gostariamos de saber se " + thirdPart + "gostou?\nCaso haja alguma dúvida, ou interesse de" + fourthPart +
 		"por favor entrar em contato nos números: 3877-9798, 98404-7475, 98405-2317\n";
 
