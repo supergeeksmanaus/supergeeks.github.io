@@ -4,6 +4,14 @@
 form{
 	margin-top: 50px;
 }
+footer{
+	position:fixed;
+   
+   bottom:0px;
+   width:100%;
+   text-align: left;
+   background:#fff;
+}
 </style>
 <head>
 <link rel="shortcut icon" href="https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/27000106947/fav_icon/MX5tLgQaf9-u7ecnIlSoacpxHPv0U3nveQ.png">
@@ -64,6 +72,9 @@ form{
 
 </div>
 </body>
+<footer>
+	v0.9a
+</footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -127,7 +138,7 @@ function getinfo() {
 	$("#nameSon").val() + "\nLink da matrícula da Fase " + $('input[name=phaseSon]:checked').val() + " " + phaseLink +"\n"+
 	"Qualquer dúvida entrar em contato com a escola nos números: 3877-9798, 98404-7475, 98405-2317\n";
 
-	var textPosAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\nO " + secondPart + $("#nameSon").val() +
+	var textPosAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n"+ fifthPart + secondPart + $("#nameSon").val() +
 		" fez uma aula demonstrativa e nós da SuperGeeks gostariamos de saber se " + thirdPart + "gostou?\nCaso haja alguma dúvida, ou interesse de" + fourthPart +
 		"por favor entrar em contato nos números: 3877-9798, 98404-7475, 98405-2317\n";
 
