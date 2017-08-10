@@ -16,11 +16,14 @@ form{
 </div>
 <form action="">
 <div class="row">
-	<div class="col-sm-5" style="text-align: right;">
+	<div class="col-sm-4" style="text-align: right;">
 		<input type="radio" name="textType" value="matricula"> Matrícula
 	</div>
 	<div class="col-sm-3">
 		<input type="radio" name="textType" value="posdemonstrativa"> Contato Pós Aula Demonstrativa
+	</div>
+	<div class="col-sm-3">
+		<input type="radio" name="textType" value="contatoemail"> Contato via e-mail
 	</div>
 </div>
 <div class="row" style="margin-top: 20px">
@@ -73,73 +76,90 @@ form{
 
 
 function getinfo() {
-var firstPart = "";
-var secondPart = "";
-var thirdPart = "";
-var fourthPart = "";
-var phaseLink = "";
-var textType = $('input[name=textType]:checked').val();
-var titleText = "";
-if ($('input[name=genderParent]:checked').val() == "male"){
-	firstPart = "Sr. ";
-} else{
-	firstPart = "Sra. ";
-}
-if ($('input[name=genderSon]:checked').val() == "male"){
-	if (textType == "matricula") {
-		secondPart = "do seu filho ";
-		thirdPart = "do aluno ";
-	} else if(textType == "posdemonstrativa"){
-		secondPart = "seu filho ";
-		thirdPart = " ele ";
-		fourthPart = " matricula-lo, ";
+	var firstPart = "";
+	var secondPart = "";
+	var thirdPart = "";
+	var fourthPart = "";
+	var phaseLink = "";
+	var textType = $('input[name=textType]:checked').val();
+	var titleText = "";
+	if ($('input[name=genderParent]:checked').val() == "male"){
+		firstPart = "Sr. ";
+	} else{
+		firstPart = "Sra. ";
 	}
-} else{
-	if (textType == "matricula") {
-		secondPart = "da sua filha ";
-		thirdPart = "da aluna ";
-	} else if(textType == "posdemonstrativa"){
-		secondPart = "sua filha ";
-		thirdPart = " ela ";
-		fourthPart = " matricula-la, ";
+	if ($('input[name=genderSon]:checked').val() == "male"){
+		if (textType == "matricula") {
+			secondPart = "do seu filho ";
+			thirdPart = "do aluno ";
+		} else if(textType == "posdemonstrativa"){
+			secondPart = "seu filho ";
+			thirdPart = " ele ";
+			fourthPart = " matricula-lo, ";
+		} else if(textType == "contatoemail"){
+			secondPart = "seu filho ";
+			thirdPart = " ele ";
+			fourthPart = " matricula-lo, ";
+		}
+	} else{
+		if (textType == "matricula") {
+			secondPart = "da sua filha ";
+			thirdPart = "da aluna ";
+		} else if(textType == "posdemonstrativa"){
+			secondPart = "sua filha ";
+			thirdPart = " ela ";
+			fourthPart = " matricula-la, ";
+		} else if(textType == "contatoemail"){
+			secondPart = "seu filho ";
+			thirdPart = " ele ";
+			fourthPart = " matricula-lo, ";
+		}
 	}
-}
-if ($('input[name=phaseSon]:checked').val() == 0) {
-	phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=1"
-} else{
-	phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=2"
-}
+	if ($('input[name=phaseSon]:checked').val() == 0) {
+		phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=1"
+	} else{
+		phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=2"
+	}
 
-var textMatricula = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\nSegue a baixo o link da matrícula " + secondPart +
-$("#nameSon").val() + "\nLink da matrícula da Fase " + $('input[name=phaseSon]:checked').val() + " " + phaseLink +"\n"+
-"Qualquer dúvida entrar em contato com a escola no número: 3877-9798, 98404-7475, 98405-2317\n";
+	var textMatricula = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\nSegue a baixo o link da matrícula " + secondPart +
+	$("#nameSon").val() + "\nLink da matrícula da Fase " + $('input[name=phaseSon]:checked').val() + " " + phaseLink +"\n"+
+	"Qualquer dúvida entrar em contato com a escola nos números: 3877-9798, 98404-7475, 98405-2317\n";
 
-var textPosAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\nO " + secondPart + $("#nameSon").val() +
-	" fez uma aula demonstrativa e nós da SuperGeeks gostariamos de saber se " + thirdPart + "gostou?\nCaso haja alguma dúvida, ou interesse de" + fourthPart +
-	"por favor entrar em contato no número: 3877-9798, 98404-7475, 98405-2317\n";
+	var textPosAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\nO " + secondPart + $("#nameSon").val() +
+		" fez uma aula demonstrativa e nós da SuperGeeks gostariamos de saber se " + thirdPart + "gostou?\nCaso haja alguma dúvida, ou interesse de" + fourthPart +
+		"por favor entrar em contato nos números: 3877-9798, 98404-7475, 98405-2317\n";
 
-
-if (textType == "matricula") {
-	titleText = "Link da matricula " + thirdPart + $("#nameSon").val();
-	
-	$("#titleGenerated").text(titleText);
-	
-	var obj = $("#textGenerated").text(textMatricula);
-	
-	obj.html(obj.html().replace(/\n/g,'<br/>'));
-
-} else if (textType == "posdemonstrativa") {
-	
-	titleText = "Escola de programação e robótica SuperGeeks";
-	
-	$("#titleGenerated").text(titleText);
-	
-	var obj = $("#textGenerated").text(textPosAgendamento);
-	
-	obj.html(obj.html().replace(/\n/g,'<br/>'));
-}
+	var textContatoEmail = "Olá " + firstPart + $("#nameParent").val() + ",\n" +
+							"A " + firstPart + " cadastrou " + secondPart + $("#nameSon").val() + " para uma aula demonstrativa gratuita em nossa escola, " +
+							"SuperGeeks, nós acabamos de inaugurar, devido a grande procura estamos entrando em contato para fazer o agendamento." + 
+							" Por favor nos ligue nos números: 3877-9798, 98404-7475, 98405-2317\n" 
 
 
+	if (textType == "matricula") {
+		titleText = "Link da matricula " + thirdPart + $("#nameSon").val();
+		
+		$("#titleGenerated").text(titleText);
+		
+		var obj = $("#textGenerated").text(textMatricula);
+		
+		obj.html(obj.html().replace(/\n/g,'<br/>'));
+
+	} else if (textType == "posdemonstrativa") {
+		titleText = "Escola de programação e robótica SuperGeeks";
+		
+		$("#titleGenerated").text(titleText);
+		
+		var obj = $("#textGenerated").text(textPosAgendamento);
+		
+		obj.html(obj.html().replace(/\n/g,'<br/>'));
+	} else if(textType == "contatoemail"){
+		titleText = "Agendamento " + secondPart + $("#nameSon").val() + " na Escola de programação e robótica SuperGeeks";
+		$("#titleGenerated").text(titleText);
+		
+		var obj = $("#textGenerated").text(textContatoEmail);
+		
+		obj.html(obj.html().replace(/\n/g,'<br/>'));
+	}
 }
 
 
