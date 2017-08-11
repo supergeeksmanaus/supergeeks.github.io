@@ -24,14 +24,17 @@ footer{
 </div>
 <form action="">
 <div class="row">
-	<div class="col-sm-4" style="text-align: right;">
+	<div class="col-sm-3" style="text-align: right;">
 		<input type="radio" name="textType" value="matricula"> Matrícula
 	</div>
 	<div class="col-sm-3">
 		<input type="radio" name="textType" value="posdemonstrativa"> Contato Pós Aula Demonstrativa
 	</div>
-	<div class="col-sm-3">
+	<div class="col-sm-2">
 		<input type="radio" name="textType" value="contatoemail"> Contato via e-mail
+	</div>
+	<div class="col-sm-2">
+		<input type="radio" name="textType" value="contatoemail"> Alunos com menos de 7 anos
 	</div>
 </div>
 <div class="row" style="margin-top: 20px">
@@ -60,6 +63,18 @@ footer{
 	</div>
 </div>
 <br>
+<div>
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-sm-5" style="text-align: right;">Nome do Funcionário:</div>
+		<div class="col-sm-2"><input id="nameEmployee" type="text" name="funcionario"></div>
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-sm-5" style="text-align: right;"><input type="radio" name="genderEmployee" value="male"> Masculino<br></div>
+	<div class="col-sm-2"><input type="radio" name="genderEmployee" value="female"> Feminino<br></div>
+</div>
+<br>
 <div class="col-sm-6" style="text-align: right;">
 	<button class="btn btn-danger" type="button" onclick="getinfo()" name="gerarTexto">Gerar Texto  </button>
 </div>
@@ -73,7 +88,7 @@ footer{
 </div>
 </body>
 <footer>
-	v0.1b
+	v0.2b
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -91,6 +106,8 @@ function getinfo() {
 	var secondPart = "";
 	var thirdPart = "";
 	var fourthPart = "";
+	var sixthPart = "";
+	var thanksEmployee = "";
 	var phaseLink = "";
 	var textType = $('input[name=textType]:checked').val();
 	var titleText = "";
@@ -109,7 +126,7 @@ function getinfo() {
 			secondPart = "seu filho ";
 			thirdPart = " ele ";
 			fourthPart = " matricula-lo, ";
-			sixthParth = "O ";
+			sixthPart = "O ";
 		} else if(textType == "contatoemail"){
 			secondPart = "seu filho ";
 			thirdPart = " ele ";
@@ -123,7 +140,7 @@ function getinfo() {
 			secondPart = "sua filha ";
 			thirdPart = " ela ";
 			fourthPart = " matricula-la, ";
-			sixthParth = "A ";
+			sixthPart = "A ";
 		} else if(textType == "contatoemail"){
 			secondPart = "sua filha ";
 			thirdPart = " ela ";
@@ -135,19 +152,25 @@ function getinfo() {
 	} else{
 		phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=2"
 	}
+	if ($('input[name=genderEmployee]:checked').val() == "male") {
+		thanksEmployee = "Obrigado, "
+
+	} else{
+		thanksEmployee = "Obrigada, "
+	}
 
 	var textMatricula = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\nSegue a baixo o link da matrícula " + secondPart +
 	$("#nameSon").val() + "\nLink da matrícula da Fase " + $('input[name=phaseSon]:checked').val() + " " + phaseLink +"\n"+
-	"Qualquer dúvida entrar em contato com a escola nos números: 3877-9798, 98404-7475, 98405-2317\n";
+	"Qualquer dúvida entrar em contato com a escola nos números: 3877-9798, 98404-7475, 98405-2317\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
 
-	var textPosAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n"+ sixthParth + secondPart + $("#nameSon").val() +
+	var textPosAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n"+ sixthPart + secondPart + $("#nameSon").val() +
 		" fez uma aula demonstrativa e nós da SuperGeeks gostariamos de saber se " + thirdPart + "gostou?\nCaso haja alguma dúvida, ou interesse de" + fourthPart +
-		"por favor entrar em contato nos números: 3877-9798, 98404-7475, 98405-2317\n";
+		"por favor entrar em contato nos números: 3877-9798, 98404-7475, 98405-2317\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
 
 	var textContatoEmail = "Olá " + firstPart + $("#nameParent").val() + ",\n" +
 							fifthPart + firstPart + " cadastrou " + secondPart + $("#nameSon").val() + " para uma aula demonstrativa gratuita em nossa escola, " +
 							"SuperGeeks, nós acabamos de inaugurar, devido a grande procura estamos entrando em contato para fazer o agendamento." + 
-							" Por favor nos ligue nos números: 3877-9798, 98404-7475, 98405-2317\n" 
+							" Por favor nos ligue nos números: 3877-9798, 98404-7475, 98405-2317\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
 
 
 	if (textType == "matricula") {
