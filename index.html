@@ -34,7 +34,7 @@ footer{
 		<input type="radio" name="textType" value="contatoemail"> Contato via e-mail
 	</div>
 	<div class="col-sm-2">
-		<input type="radio" name="textType" value="contatoemail"> Alunos com menos de 7 anos
+		<input type="radio" name="textType" value="menores"> Alunos com menos de 7 anos
 	</div>
 </div>
 <div class="row" style="margin-top: 20px">
@@ -47,8 +47,10 @@ footer{
 </div>
 <br><br>
 <div class="row">
-<div class="col-sm-5" style="text-align: right;"><p>Nome do filho:</p></div>
-<div class="col-sm-6"><input id="nameSon" type="text" name="filho"></div>
+<div class="col-sm-3" style="text-align: right;"><p>Nome do filho:</p></div>
+<div class="col-sm-1"><input id="nameSon" type="text" name="filho"></div>
+<div class="col-sm-2" style="text-align: right;"><p>Idade:</p></div>
+<div class="col-sm-3"><input id="ageSon" type="number" name="idadefilho"></div>
 </div>
 <div class="row">
 	<div class="col-sm-5" style="text-align: right;"><input type="radio" name="genderSon" value="male"> Masculino<br></div>
@@ -88,7 +90,7 @@ footer{
 </div>
 </body>
 <footer>
-	v0.2b
+	v0.3b
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -113,10 +115,20 @@ function getinfo() {
 	var titleText = "";
 	if ($('input[name=genderParent]:checked').val() == "male"){
 		firstPart = "Sr. ";
-		fifthPart = "O ";
+		if (textType == "menores") {
+			secondPart = "o ";
+			fifthPart = "o ";
+		}else{
+			fifthPart = "O ";
+		}
 	} else{
-		fifthPart = "A ";
 		firstPart = "Sra. ";
+		if (textType == "menores") {
+			secondPart = "a ";
+			fifthPart = "a ";
+		} else{
+			fifthPart = "A ";
+		}
 	}
 	if ($('input[name=genderSon]:checked').val() == "male"){
 		if (textType == "matricula") {
@@ -131,6 +143,9 @@ function getinfo() {
 			secondPart = "seu filho ";
 			thirdPart = " ele ";
 			fourthPart = " do "
+		} else if (textType == "menores") {
+			thirdPart = "seu filho ";
+			fourthPart = "dele ";
 		}
 	} else{
 		if (textType == "matricula") {
@@ -145,12 +160,15 @@ function getinfo() {
 			secondPart = "sua filha ";
 			thirdPart = " ela ";
 			fourthPart = " da "
+		} else if (textType == "menores") {
+			thirdPart = "sua filha ";
+			fourthPart = "dela ";
 		}
 	}
 	if ($('input[name=phaseSon]:checked').val() == 0) {
-		phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=1"
+		phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=1";
 	} else{
-		phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=2"
+		phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=2";
 	}
 	if ($('input[name=genderEmployee]:checked').val() == "male") {
 		thanksEmployee = "Obrigado, "
@@ -172,6 +190,10 @@ function getinfo() {
 							"SuperGeeks, nós acabamos de inaugurar, devido a grande procura estamos entrando em contato para fazer o agendamento." + 
 							" Por favor nos ligue nos números: 3877-9798, 98404-7475, 98405-2317\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
 
+	var textParaMenores = "Olá " + firstPart + $("#nameParent").val() + ",\n" +
+						  "Como vai? " + secondPart + firstPart + " se cadastrou para uma aula demonstrativa para " + thirdPart + $("#nameSon").val() + " de " + $("#ageSon").val() + " anos, infelizmente, no momento só teremos " +
+						  "cursos para crianças de 7 anos estando no segundo ano escolar, mas ano que vem teremos o SuperKids para idade " + fourthPart + ", assim que estivermos oferecendo em Manaus, entraremos em contato " +
+						  "avisando " + fifthPart + firstPart + "\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
 
 	if (textType == "matricula") {
 		titleText = "Link da matricula " + thirdPart + $("#nameSon").val();
@@ -195,6 +217,13 @@ function getinfo() {
 		$("#titleGenerated").text(titleText);
 		
 		var obj = $("#textGenerated").text(textContatoEmail);
+		
+		obj.html(obj.html().replace(/\n/g,'<br/>'));
+	} else if(textType == "menores"){
+		titleText = "Agendamento de Aula Demonstrativa Gratuita na escola de programação e robótica SuperGeeks";
+		$("#titleGenerated").text(titleText);
+		
+		var obj = $("#textGenerated").text(textParaMenores);
 		
 		obj.html(obj.html().replace(/\n/g,'<br/>'));
 	}
