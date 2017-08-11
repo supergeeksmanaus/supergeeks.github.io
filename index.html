@@ -48,7 +48,7 @@ footer{
 <br><br>
 <div class="row">
 <div class="col-sm-3" style="text-align: right;"><p>Nome do filho:</p></div>
-<div class="col-sm-1"><input id="nameSon" type="text" name="filho"></div>
+<div class="col-sm-2"><input id="nameSon" type="text" name="filho"></div>
 <div class="col-sm-2" style="text-align: right;"><p>Idade:</p></div>
 <div class="col-sm-3"><input id="ageSon" type="number" name="idadefilho"></div>
 </div>
@@ -90,7 +90,7 @@ footer{
 </div>
 </body>
 <footer>
-	v0.3b
+	v0.4b
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -116,7 +116,7 @@ function getinfo() {
 	if ($('input[name=genderParent]:checked').val() == "male"){
 		firstPart = "Sr. ";
 		if (textType == "menores") {
-			secondPart = "o ";
+			secondPart = "O ";
 			fifthPart = "o ";
 		}else{
 			fifthPart = "O ";
@@ -124,7 +124,7 @@ function getinfo() {
 	} else{
 		firstPart = "Sra. ";
 		if (textType == "menores") {
-			secondPart = "a ";
+			secondPart = "A ";
 			fifthPart = "a ";
 		} else{
 			fifthPart = "A ";
@@ -191,8 +191,8 @@ function getinfo() {
 							" Por favor nos ligue nos números: 3877-9798, 98404-7475, 98405-2317\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
 
 	var textParaMenores = "Olá " + firstPart + $("#nameParent").val() + ",\n" +
-						  "Como vai? " + secondPart + firstPart + " se cadastrou para uma aula demonstrativa para " + thirdPart + $("#nameSon").val() + " de " + $("#ageSon").val() + " anos, infelizmente, no momento só teremos " +
-						  "cursos para crianças de 7 anos estando no segundo ano escolar, mas ano que vem teremos o SuperKids para idade " + fourthPart + ", assim que estivermos oferecendo em Manaus, entraremos em contato " +
+						  "Como vai? " + secondPart + firstPart + " cadastrou " + thirdPart + $("#nameSon").val() + " de " + $("#ageSon").val() + " anos para uma aula demonstrativa, infelizmente, no momento só teremos " +
+						  "cursos para crianças de 7 anos estando no segundo ano escolar, mas ano que vem teremos o SuperKids para crianças de 5 a 8 anos de idade, assim que o curso estiver disponível em Manaus, entraremos em contato " +
 						  "avisando " + fifthPart + firstPart + "\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
 
 	if (textType == "matricula") {
