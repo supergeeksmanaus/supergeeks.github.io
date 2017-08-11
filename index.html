@@ -90,7 +90,7 @@ footer{
 </div>
 </body>
 <footer>
-	v0.4b
+	v0.5b
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -177,20 +177,20 @@ function getinfo() {
 		thanksEmployee = "Obrigada, "
 	}
 
-	var textMatricula = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\nSegue a baixo o link da matrícula " + secondPart +
+	var textMatricula = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n\nSegue a baixo o link da matrícula " + secondPart +
 	$("#nameSon").val() + "\nLink da matrícula da Fase " + $('input[name=phaseSon]:checked').val() + " " + phaseLink +"\n"+
 	"Qualquer dúvida entrar em contato com a escola nos números: 3877-9798, 98404-7475, 98405-2317\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
 
-	var textPosAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n"+ sixthPart + secondPart + $("#nameSon").val() +
+	var textPosAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n\n"+ sixthPart + secondPart + $("#nameSon").val() +
 		" fez uma aula demonstrativa e nós da SuperGeeks gostariamos de saber se " + thirdPart + "gostou?\nCaso haja alguma dúvida, ou interesse de" + fourthPart +
 		"por favor entrar em contato nos números: 3877-9798, 98404-7475, 98405-2317\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
 
-	var textContatoEmail = "Olá " + firstPart + $("#nameParent").val() + ",\n" +
+	var textContatoEmail = "Olá " + firstPart + $("#nameParent").val() + ",\n\n" +
 							fifthPart + firstPart + " cadastrou " + secondPart + $("#nameSon").val() + " para uma aula demonstrativa gratuita em nossa escola, " +
-							"SuperGeeks, nós acabamos de inaugurar, devido a grande procura estamos entrando em contato para fazer o agendamento." + 
+							"SuperGeeks.\nNós acabamos de inaugurar, devido a grande procura estamos entrando em contato para fazer o agendamento." + 
 							" Por favor nos ligue nos números: 3877-9798, 98404-7475, 98405-2317\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
 
-	var textParaMenores = "Olá " + firstPart + $("#nameParent").val() + ",\n" +
+	var textParaMenores = "Olá " + firstPart + $("#nameParent").val() + ",\n\n" +
 						  "Como vai? " + secondPart + firstPart + " cadastrou " + thirdPart + $("#nameSon").val() + " de " + $("#ageSon").val() + " anos para uma aula demonstrativa, infelizmente, no momento só teremos " +
 						  "cursos para crianças de 7 anos estando no segundo ano escolar, mas ano que vem teremos o SuperKids para crianças de 5 a 8 anos de idade, assim que o curso estiver disponível em Manaus, entraremos em contato " +
 						  "avisando " + fifthPart + firstPart + "\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
