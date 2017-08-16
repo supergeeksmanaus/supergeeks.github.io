@@ -78,13 +78,13 @@ footer{
 	</div>
 	<div class="row">
 		<div class="col-sm-5" style="text-align: right;"><p>QuickCode: </p></div>
-		<div class="col-sm-2"><label><input type="radio" name="CE" value="0"> Robótica<br></label></div>
-		<div class="col-sm-3"><label><input type="radio" name="CE" value="1"> Programação no Minecraft<br></label></div>
+		<div class="col-sm-2"><label><input type="radio" name="phaseSon" value="Robótica"> Robótica<br></label></div>
+		<div class="col-sm-3"><label><input type="radio" name="phaseSon" value="Programação no Minecraft"> Programação no Minecraft<br></label></div>
 	</div>
 	<div class="row">
 		<div class="col-sm-5" style="text-align: right;"><p>Curso Extra: </p></div>
-		<div class="col-sm-2"><label><input type="radio" name="CE" value="0"> YouTuber<br></label></div>
-		<div class="col-sm-2"><label><input type="radio" name="CE" value="1"> Roblox<br></label></div>
+		<div class="col-sm-2"><label><input type="radio" name="phaseSon" value="YouTuber"> YouTuber<br></label></div>
+		<div class="col-sm-2"><label><input type="radio" name="phaseSon" value="Roblox"> Roblox<br></label></div>
 	</div>
 </div>
 <br>
@@ -114,7 +114,7 @@ footer{
 </div>
 </body>
 <footer>
-	v0.6b
+	v0.7b
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -207,9 +207,18 @@ function getinfo() {
 	}
 	if ($('input[name=phaseSon]:checked').val() == 0) {
 		phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=1";
-	} else{
+	} else if ($('input[name=phaseSon]:checked').val() == 1){
 		phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=2";
+	} else if ($('input[name=phaseSon]:checked').val() == "Robótica"){
+		phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=12";
+	} else if ($('input[name=phaseSon]:checked').val() == "Programação no Minecraft"){
+		phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=10";
+	} else if ($('input[name=phaseSon]:checked').val() == "YouTuber"){
+		phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=9";
+	} else if ($('input[name=phaseSon]:checked').val() == "Roblox"){
+		phaseLink = "https://apps.superlogica.net/educacional/publico/matricular?publico=1&licenca=sgmanaus&idcurso=20";
 	}
+
 	if ($('input[name=genderEmployee]:checked').val() == "male") {
 		thanksEmployee = "Obrigado, "
 
@@ -235,13 +244,26 @@ function getinfo() {
 						  "cursos para crianças de 7 anos estando no segundo ano escolar, mas ano que vem teremos o SuperKids para crianças de 5 a 8 anos de idade, assim que o curso estiver disponível em Manaus, entraremos em contato " +
 						  "avisando " + fifthPart + firstPart + "\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
 
+	var textQuickCode =  "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n\nSegue a baixo o link da matrícula " + secondPart +
+	$("#nameSon").val() + "\nLink da matrícula do QuickCode de " + $('input[name=phaseSon]:checked').val() + " " + phaseLink +"\n"+
+	"Qualquer dúvida entrar em contato com a escola nos números: 3877-9798, 98404-7475, 98405-2317\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
+
+	var textCursoExtra = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n\nSegue a baixo o link da matrícula " + secondPart +
+	$("#nameSon").val() + "\nLink da matrícula no Curso Extra de " + $('input[name=phaseSon]:checked').val() + " " + phaseLink +"\n"+
+	"Qualquer dúvida entrar em contato com a escola nos números: 3877-9798, 98404-7475, 98405-2317\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
+
 	if (textType == "matricula") {
 		titleText = "Link da matricula " + thirdPart + $("#nameSon").val();
 		
 		$("#titleGenerated").text(titleText);
-		
-		var obj = $("#textGenerated").text(textMatricula);
-		
+		var obj = ""
+		if ($('input[name=phaseSon]:checked').val() == 0 || $('input[name=phaseSon]:checked').val() == 1){
+			obj = $("#textGenerated").text(textMatricula);
+		} else if ($('input[name=phaseSon]:checked').val() == "Robótica" || $('input[name=phaseSon]:checked').val() == "Programação no Minecraft"){
+			obj = $("#textGenerated").text(textQuickCode);
+		} else if ($('input[name=phaseSon]:checked').val() == "YouTuber" || $('input[name=phaseSon]:checked').val() == "Roblox"){
+			obj = $("#textGenerated").text(textCursoExtra);
+		}
 		obj.html(obj.html().replace(/\n/g,'<br/>'));
 
 	} else if (textType == "posdemonstrativa") {
