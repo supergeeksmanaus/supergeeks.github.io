@@ -12,6 +12,18 @@ footer{
    text-align: left;
    background:#fff;
 }
+
+@font-face {
+    font-family: rabbit;
+    src: url(KGNeatlyPrinted.ttf);
+}
+
+.container{
+	font-family: rabbit;
+	font-size: 20px;
+	font-weight: bold;
+}
+
 </style>
 <head>
 <link rel="shortcut icon" href="https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/27000106947/fav_icon/MX5tLgQaf9-u7ecnIlSoacpxHPv0U3nveQ.png">
@@ -25,43 +37,54 @@ footer{
 <form action="">
 <div class="row">
 	<div class="col-sm-3" style="text-align: right;">
-		<input type="radio" name="textType" value="matricula"> Matrícula
+		<label><input type="radio" name="textType" value="matricula"> Matrícula</label>
 	</div>
 	<div class="col-sm-3">
-		<input type="radio" name="textType" value="posdemonstrativa"> Contato Pós Aula Demonstrativa
+		<label><input type="radio" name="textType" value="posdemonstrativa"> Contato Pós Aula Demonstrativa</label>
 	</div>
 	<div class="col-sm-2">
-		<input type="radio" name="textType" value="contatoemail"> Contato via e-mail
+		<label><input type="radio" name="textType" value="contatoemail"> Contato via e-mail</label>
 	</div>
 	<div class="col-sm-2">
-		<input type="radio" name="textType" value="menores"> Alunos com menos de 7 anos
+		<label><input type="radio" name="textType" value="menores"> Alunos com menos de 7 anos</label>
 	</div>
 </div>
+<div id="fields">
 <div class="row" style="margin-top: 20px">
 	<div class="col-sm-5" style="text-align:right;">Nome do responsável:</div>
 	<div class="col-sm-6" ><input id="nameParent" type="text" name="responsavel"></div>
 </div>
 <div class="row">
-	<div class="col-sm-5" style="text-align: right;"><input type="radio" name="genderParent" value="male"> Masculino<br></div>
-	<div class="col-sm-2"><input type="radio" name="genderParent" value="female"> Feminino<br></div>
+	<div class="col-sm-5" style="text-align: right;"><label><input type="radio" name="genderParent" value="male"> Masculino<br></label></div>
+	<div class="col-sm-2"><label><input type="radio" name="genderParent" value="female"> Feminino<br></label></div>
 </div>
 <br><br>
 <div class="row">
 <div class="col-sm-3" style="text-align: right;"><p>Nome do filho:</p></div>
 <div class="col-sm-2"><input id="nameSon" type="text" name="filho"></div>
-<div class="col-sm-2" style="text-align: right;"><p>Idade:</p></div>
-<div class="col-sm-3"><input id="ageSon" type="number" name="idadefilho"></div>
+	<div class="col-sm-2 divAge" style="text-align: right;"><p>Idade:</p></div>
+	<div class="col-sm-3 divAge"><input id="ageSon" type="number" name="idadefilho"></div>
 </div>
 <div class="row">
-	<div class="col-sm-5" style="text-align: right;"><input type="radio" name="genderSon" value="male"> Masculino<br></div>
-	<div class="col-sm-2"><input type="radio" name="genderSon" value="female"> Feminino<br></div>
+	<div class="col-sm-5" style="text-align: right;"><label><input type="radio" name="genderSon" value="male"> Masculino<br></label></div>
+	<div class="col-sm-2"><label><input type="radio" name="genderSon" value="female"> Feminino<br></label></div>
 </div>
 <br><br>
-<div>
+<div id="courseChoice">
 	<div class="row">
-		<div class="col-sm-5" style="text-align: right;"><p>Fase do aluno</p></div>
-		<div class="col-sm-1"><input type="radio" name="phaseSon" value="0"> Fase 0<br></div>
-		<div class="col-sm-1"><input type="radio" name="phaseSon" value="1"> Fase 1<br></div>
+		<div class="col-sm-5" style="text-align: right;"><p>Fase do aluno: </p></div>
+		<div class="col-sm-1"><label><input type="radio" name="phaseSon" value="0"> Fase 0<br></label></div>
+		<div class="col-sm-1"><label><input type="radio" name="phaseSon" value="1"> Fase 1<br></label></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-5" style="text-align: right;"><p>QuickCode: </p></div>
+		<div class="col-sm-2"><label><input type="radio" name="CE" value="0"> Robótica<br></label></div>
+		<div class="col-sm-3"><label><input type="radio" name="CE" value="1"> Programação no Minecraft<br></label></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-5" style="text-align: right;"><p>Curso Extra: </p></div>
+		<div class="col-sm-2"><label><input type="radio" name="CE" value="0"> YouTuber<br></label></div>
+		<div class="col-sm-2"><label><input type="radio" name="CE" value="1"> Roblox<br></label></div>
 	</div>
 </div>
 <br>
@@ -73,15 +96,16 @@ footer{
 </div>
 <br>
 <div class="row">
-	<div class="col-sm-5" style="text-align: right;"><input type="radio" name="genderEmployee" value="male"> Masculino<br></div>
-	<div class="col-sm-2"><input type="radio" name="genderEmployee" value="female"> Feminino<br></div>
+	<div class="col-sm-5" style="text-align: right;"><label><input type="radio" name="genderEmployee" value="male"> Masculino<br></label></div>
+	<div class="col-sm-2"><label><input type="radio" name="genderEmployee" value="female"> Feminino<br></label></div>
 </div>
 <br>
 <div class="col-sm-6" style="text-align: right;">
 	<button class="btn btn-danger" type="button" onclick="getinfo()" name="gerarTexto">Gerar Texto  </button>
 </div>
+</div>
 <br><br>
-<div style="margin-left: 100px;">
+<div style="margin-left: 100px; height: 400px">
 	<h3 id="titleGenerated"></h3>
 	<span id="textGenerated"></span>
 </div>
@@ -90,7 +114,7 @@ footer{
 </div>
 </body>
 <footer>
-	v0.5b
+	v0.6b
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -101,7 +125,23 @@ footer{
 
 <script type="text/javascript">
 
-
+$(document).ready(function() {
+	$("#fields").hide();
+    $('input[type=radio][name=textType]').change(function() {
+    	$("#fields").show();
+        if (this.value == 'contatoemail' || 
+        	this.value == 'posdemonstrativa') {
+            $("#courseChoice").hide();
+        	$(".divAge").hide();
+        } else if (this.value == "matricula") {
+        	$("#courseChoice").show();
+        	$(".divAge").hide();
+        } else if (this.value == "menores"){
+        	$(".divAge").show();
+        	$("#courseChoice").hide();
+        }        
+    });
+});
 
 function getinfo() {
 	var firstPart = "";
