@@ -24,6 +24,12 @@ footer{
 	font-weight: bold;
 }
 
+input{
+	border: 1px solid #ff0000;
+	border-radius: 15px;
+	padding: 0px 0px 0px 10px;
+}
+
 </style>
 <head>
 <link rel="shortcut icon" href="https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/27000106947/fav_icon/MX5tLgQaf9-u7ecnIlSoacpxHPv0U3nveQ.png">
@@ -36,7 +42,7 @@ footer{
 </div>
 <form action="">
 <div class="row">
-	<div class="col-sm-3" style="text-align: right;">
+	<div class="col-sm-2" style="text-align: right;">
 		<label><input type="radio" name="textType" value="matricula"> Matrícula</label>
 	</div>
 	<div class="col-sm-3">
@@ -45,8 +51,11 @@ footer{
 	<div class="col-sm-2">
 		<label><input type="radio" name="textType" value="contatoemail"> Contato via e-mail</label>
 	</div>
-	<div class="col-sm-2">
+	<div class="col-sm-3">
 		<label><input type="radio" name="textType" value="menores"> Alunos com menos de 7 anos</label>
+	</div>
+	<div class="col-sm-2">
+		<label><input type="radio" name="textType" value="agendamento"> Agendamento</label>
 	</div>
 </div>
 <div id="fields">
@@ -60,10 +69,16 @@ footer{
 </div>
 <br><br>
 <div class="row">
-<div class="col-sm-3" style="text-align: right;"><p>Nome do filho:</p></div>
-<div class="col-sm-2"><input id="nameSon" type="text" name="filho"></div>
+	<div class="col-sm-3" style="text-align: right;"><p>Nome do filho:</p></div>
+	<div class="col-sm-2"><input id="nameSon" type="text" name="filho"></div>
 	<div class="col-sm-2 divAge" style="text-align: right;"><p>Idade:</p></div>
 	<div class="col-sm-3 divAge"><input id="ageSon" type="number" name="idadefilho"></div>
+</div>
+<div class="row" style="margin-top: 40px">
+	<div class="col-sm-3" style="text-align: right;"><p>Data:</p></div>
+	<div class="col-sm-2"><input type="date" name="data"></div>
+	<div class="col-sm-2" style="text-align: right;"><p>Horário:</p></div>
+	<div class="col-sm-3"><input type="time" name="horário"></div>
 </div>
 <div class="row">
 	<div class="col-sm-5" style="text-align: right;"><label><input type="radio" name="genderSon" value="male"> Masculino<br></label></div>
@@ -114,7 +129,7 @@ footer{
 </div>
 </body>
 <footer>
-	v0.7b
+	v0.8b
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -282,7 +297,7 @@ function getinfo() {
 		
 		obj.html(obj.html().replace(/\n/g,'<br/>'));
 	} else if(textType == "menores"){
-		titleText = "Agendamento de Aula Demonstrativa Gratuita na escola de programação e robótica SuperGeeks";
+		titleText = "Escola de programação e robótica SuperGeeks";
 		$("#titleGenerated").text(titleText);
 		
 		var obj = $("#textGenerated").text(textParaMenores);
