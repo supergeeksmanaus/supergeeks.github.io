@@ -74,17 +74,18 @@ input{
 	<div class="col-sm-2 divAge" style="text-align: right;"><p>Idade:</p></div>
 	<div class="col-sm-3 divAge"><input id="ageSon" type="number" name="idadefilho"></div>
 </div>
-<div id="choiceDate">
-	<div class="row" style="margin-top: 40px">
-		<div class="col-sm-3" style="text-align: right;"><p>Data:</p></div>
-		<div class="col-sm-2"><input type="date" name="data"></div>
-		<div class="col-sm-2" style="text-align: right;"><p>Horário:</p></div>
-		<div class="col-sm-3"><input type="time" name="horário"></div>
-	</div>
-</div>
 <div class="row">
 	<div class="col-sm-5" style="text-align: right;"><label><input type="radio" name="genderSon" value="male"> Masculino<br></label></div>
 	<div class="col-sm-2"><label><input type="radio" name="genderSon" value="female"> Feminino<br></label></div>
+</div>
+<br><br>
+<div id="choiceDate">
+	<div class="row">
+		<div class="col-sm-3" style="text-align: right;"><p>Data:</p></div>
+		<div class="col-sm-2"><input id="scheduleDate" type="date" name="data"></div>
+		<div class="col-sm-2" style="text-align: right;"><p>Horário:</p></div>
+		<div class="col-sm-3"><input id="scheduleHour" type="time" name="horário"></div>
+	</div>
 </div>
 <br><br>
 <div id="courseChoice">
@@ -131,7 +132,7 @@ input{
 </div>
 </body>
 <footer>
-	v0.9b
+	v0.1c
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -168,6 +169,10 @@ $(document).ready(function() {
 });
 
 function getinfo() {
+
+	var days = [ 'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado' ];
+
+
 	var firstPart = "";
 	var secondPart = "";
 	var thirdPart = "";
@@ -210,6 +215,8 @@ function getinfo() {
 		} else if (textType == "menores") {
 			thirdPart = "seu filho ";
 			fourthPart = "dele ";
+		} else if (textType == "agendamento") {
+			secondPart = "do seu filho ";
 		}
 	} else{
 		if (textType == "matricula") {
@@ -227,6 +234,8 @@ function getinfo() {
 		} else if (textType == "menores") {
 			thirdPart = "sua filha ";
 			fourthPart = "dela ";
+		} else if (textType == "agendamento") {
+			secondPart = "da sua filha ";
 		}
 	}
 	if ($('input[name=phaseSon]:checked').val() == 0) {
@@ -276,6 +285,17 @@ function getinfo() {
 	$("#nameSon").val() + "\nLink da matrícula no Curso Extra de " + $('input[name=phaseSon]:checked').val() + " " + phaseLink +"\n"+
 	"Qualquer dúvida entrar em contato com a escola nos números: 3877-9798, 98404-7475, 98405-2317\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
 
+
+	d = new Date($("#scheduleDate").val()); //This returns Wed Apr 02 2014 17:28:55 GMT+0800 (Malay Peninsula Standard Time)
+	x = d.getDay(); //This returns a number, starting with 0 for Sunday 
+
+	var dateAr = $("#scheduleDate").val().split('-');
+	var newDate = dateAr[2] + '-' + dateAr[1] + '-' + dateAr[0].slice(-2);
+	
+	var textAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n\nConfirmo a Aula demonstrativa " + secondPart + $("#nameSon").val() + " para " + days[x] + " dia "  + newDate + " às "
+						  + $("#scheduleHour").val() + ".\nNo endereço Rua Rio Purús, 500, N. Senhora das Graças (Vieiralves ao lado do CCAA).\n" +
+						  "Qualquer dúvida entrar em contato com a escola nos números: 3877-9798, 98404-7475, 98405-2317\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
+
 	if (textType == "matricula") {
 		titleText = "Link da matricula " + thirdPart + $("#nameSon").val();
 		
@@ -310,6 +330,13 @@ function getinfo() {
 		$("#titleGenerated").text(titleText);
 		
 		var obj = $("#textGenerated").text(textParaMenores);
+		
+		obj.html(obj.html().replace(/\n/g,'<br/>'));
+	} else if (textType == "agendamento") {
+		titleText = "Confirmação de Agendamento na escola de programação e robótica SuperGeeks";
+		$("#titleGenerated").text(titleText);
+		
+		var obj = $("#textGenerated").text(textAgendamento);
 		
 		obj.html(obj.html().replace(/\n/g,'<br/>'));
 	}
