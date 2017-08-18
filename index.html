@@ -74,11 +74,13 @@ input{
 	<div class="col-sm-2 divAge" style="text-align: right;"><p>Idade:</p></div>
 	<div class="col-sm-3 divAge"><input id="ageSon" type="number" name="idadefilho"></div>
 </div>
-<div class="row" style="margin-top: 40px">
-	<div class="col-sm-3" style="text-align: right;"><p>Data:</p></div>
-	<div class="col-sm-2"><input type="date" name="data"></div>
-	<div class="col-sm-2" style="text-align: right;"><p>Horário:</p></div>
-	<div class="col-sm-3"><input type="time" name="horário"></div>
+<div id="choiceDate">
+	<div class="row" style="margin-top: 40px">
+		<div class="col-sm-3" style="text-align: right;"><p>Data:</p></div>
+		<div class="col-sm-2"><input type="date" name="data"></div>
+		<div class="col-sm-2" style="text-align: right;"><p>Horário:</p></div>
+		<div class="col-sm-3"><input type="time" name="horário"></div>
+	</div>
 </div>
 <div class="row">
 	<div class="col-sm-5" style="text-align: right;"><label><input type="radio" name="genderSon" value="male"> Masculino<br></label></div>
@@ -129,7 +131,7 @@ input{
 </div>
 </body>
 <footer>
-	v0.8b
+	v0.9b
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -146,15 +148,22 @@ $(document).ready(function() {
     	$("#fields").show();
         if (this.value == 'contatoemail' || 
         	this.value == 'posdemonstrativa') {
+        	$("#choiceDate").hide();
             $("#courseChoice").hide();
         	$(".divAge").hide();
         } else if (this.value == "matricula") {
+        	$("#choiceDate").hide();
         	$("#courseChoice").show();
         	$(".divAge").hide();
         } else if (this.value == "menores"){
+        	$("#choiceDate").hide();
         	$(".divAge").show();
         	$("#courseChoice").hide();
-        }        
+        } else if (this.value == "agendamento") {
+        	$(".divAge").hide();
+        	$("#choiceDate").show();
+            $("#courseChoice").hide();
+        }
     });
 });
 
