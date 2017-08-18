@@ -82,7 +82,7 @@ input{
 <div id="choiceDate">
 	<div class="row">
 		<div class="col-sm-3" style="text-align: right;"><p>Data:</p></div>
-		<div class="col-sm-2"><input id="scheduleDate" type="date" name="data"></div>
+		<div class="col-sm-2"><input id="scheduleDate" type="text" name="data"></div>
 		<div class="col-sm-2" style="text-align: right;"><p>Horário:</p></div>
 		<div class="col-sm-3"><input id="scheduleHour" type="time" name="horário"></div>
 	</div>
@@ -132,16 +132,26 @@ input{
 </div>
 </body>
 <footer>
-	v0.1c
+	v0.2c
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
+
+$( function() {
+    $( "#scheduleDate" ).datepicker({
+    	dateFormat: "dd/mm/yy"
+    });
+  } );
 
 $(document).ready(function() {
 	$("#fields").hide();
@@ -287,10 +297,12 @@ function getinfo() {
 
 
 	d = new Date($("#scheduleDate").val()); //This returns Wed Apr 02 2014 17:28:55 GMT+0800 (Malay Peninsula Standard Time)
+	console.log(new Date($("#scheduleDate").val()));
+	console.log(new Date());
 	x = d.getDay(); //This returns a number, starting with 0 for Sunday 
 
-	var dateAr = $("#scheduleDate").val().split('-');
-	var newDate = dateAr[2] + '-' + dateAr[1] + '-' + dateAr[0].slice(-2);
+	var dateAr = $("#scheduleDate").val().split('/');
+	var newDate = dateAr[1] + '-' + dateAr[0] + '-' + dateAr[2].slice(-2);
 	
 	var textAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n\nConfirmo a Aula demonstrativa " + secondPart + $("#nameSon").val() + " para " + days[x] + " dia "  + newDate + " às "
 						  + $("#scheduleHour").val() + ".\nNo endereço Rua Rio Purús, 500, N. Senhora das Graças (Vieiralves ao lado do CCAA).\n" +
