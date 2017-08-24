@@ -37,6 +37,25 @@ input{
 </head>
 <body>
 <div class="container">
+<div class="modal fade" id="popUp" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Ops!</h4>
+        </div>
+        <div class="modal-body">
+          <p id="modal-body-text">Selecione pelo menos um tipo de curso. :)</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">OK!</button>
+        </div>
+      </div>
+      
+    </div>
+    </div>
 <div style="text-align: center; margin-top: 20px">
 <img src="https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/27000106946/logo/ICqmNTvVq_G-HnhI7BCIdktR0tfctXvCtw.png">
 </div>
@@ -132,7 +151,7 @@ input{
 </div>
 </body>
 <footer>
-	v0.3c
+	v0.4c
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -297,10 +316,17 @@ function getinfo() {
 
 
 	
-
-	var dateAr = $("#scheduleDate").val().split('/');
-	var newDate = dateAr[0] + '-' + dateAr[1] + '-' + dateAr[2].slice(-2);
-	var dateForDay = dateAr[1] + '/' + dateAr[0] + '/' + dateAr[2];
+	if (textType == "agendamento") {
+		var dateAr = $("#scheduleDate").val().split('/');
+		if ($('#scheduleDate').val() == "") {
+			$('#modal-body-text').text('Escolha uma data para gerar o texto. ^^');
+			$('#popUp').modal();
+		}
+		var newDate = dateAr[0] + '-' + dateAr[1] + '-' + dateAr[2].slice(-2);
+		var dateForDay = dateAr[1] + '/' + dateAr[0] + '/' + dateAr[2];
+		
+	}
+	var obj = ""
 
 	d = new Date(dateForDay); //This returns Wed Apr 02 2014 17:28:55 GMT+0800 (Malay Peninsula Standard Time)
 	x = d.getDay(); //This returns a number, starting with 0 for Sunday 
@@ -313,13 +339,16 @@ function getinfo() {
 		titleText = "Link da matricula " + thirdPart + $("#nameSon").val();
 		
 		$("#titleGenerated").text(titleText);
-		var obj = ""
+		
 		if ($('input[name=phaseSon]:checked').val() == 0 || $('input[name=phaseSon]:checked').val() == 1){
 			obj = $("#textGenerated").text(textMatricula);
 		} else if ($('input[name=phaseSon]:checked').val() == "Robótica" || $('input[name=phaseSon]:checked').val() == "Programação no Minecraft"){
 			obj = $("#textGenerated").text(textQuickCode);
 		} else if ($('input[name=phaseSon]:checked').val() == "YouTuber" || $('input[name=phaseSon]:checked').val() == "Roblox"){
 			obj = $("#textGenerated").text(textCursoExtra);
+		} else {
+			$('#modal-body-text').text('Selecione pelo menos um tipo de curso. :)');
+			$('#popUp').modal();
 		}
 		obj.html(obj.html().replace(/\n/g,'<br/>'));
 
@@ -328,28 +357,28 @@ function getinfo() {
 		
 		$("#titleGenerated").text(titleText);
 		
-		var obj = $("#textGenerated").text(textPosAgendamento);
+		obj = $("#textGenerated").text(textPosAgendamento);
 		
 		obj.html(obj.html().replace(/\n/g,'<br/>'));
 	} else if(textType == "contatoemail"){
 		titleText = "Agendamento " + fourthPart + $("#nameSon").val() + " na Escola de programação e robótica SuperGeeks";
 		$("#titleGenerated").text(titleText);
 		
-		var obj = $("#textGenerated").text(textContatoEmail);
+		obj = $("#textGenerated").text(textContatoEmail);
 		
 		obj.html(obj.html().replace(/\n/g,'<br/>'));
 	} else if(textType == "menores"){
 		titleText = "Escola de programação e robótica SuperGeeks";
 		$("#titleGenerated").text(titleText);
 		
-		var obj = $("#textGenerated").text(textParaMenores);
+		obj = $("#textGenerated").text(textParaMenores);
 		
 		obj.html(obj.html().replace(/\n/g,'<br/>'));
 	} else if (textType == "agendamento") {
 		titleText = "Confirmação de Agendamento na escola de programação e robótica SuperGeeks";
 		$("#titleGenerated").text(titleText);
 		
-		var obj = $("#textGenerated").text(textAgendamento);
+		obj = $("#textGenerated").text(textAgendamento);
 		
 		obj.html(obj.html().replace(/\n/g,'<br/>'));
 	}
