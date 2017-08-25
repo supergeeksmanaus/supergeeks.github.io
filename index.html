@@ -151,7 +151,7 @@ input{
 </div>
 </body>
 <footer>
-	v0.4c
+	v0.5c
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -324,6 +324,27 @@ function getinfo() {
 		}
 		var newDate = dateAr[0] + '-' + dateAr[1] + '-' + dateAr[2].slice(-2);
 		var dateForDay = dateAr[1] + '/' + dateAr[0] + '/' + dateAr[2];
+
+		var prodhrd = $('#scheduleHour').val();
+		var conprod = "01:30";
+		var prodhrdArr = prodhrd.split(":");
+		var conprodArr = conprod.split(":");
+		var hh1 = parseInt(prodhrdArr[0]) + parseInt(conprodArr[0]);
+		var mm1 = parseInt(prodhrdArr[1]) + parseInt(conprodArr[1]);
+		if (mm1 > 59) {
+			var mm2 = mm1 % 60;
+   			var mmx = mm1 / 60;
+		    var mm3 = parseInt(mmx);//add into hour
+		    var hh1 = parseInt(hh1) + parseInt(mm3);
+		    var mm1 = mm2;
+		}
+		var finaladd = hh1 + ':' + mm1;
+		console.log(mm1);
+		if (mm1 == 0) {
+			console.log('true');
+			finaladd = hh1 + ':' + '00';
+		}
+		
 		
 	}
 	var obj = ""
@@ -331,8 +352,8 @@ function getinfo() {
 	d = new Date(dateForDay); //This returns Wed Apr 02 2014 17:28:55 GMT+0800 (Malay Peninsula Standard Time)
 	x = d.getDay(); //This returns a number, starting with 0 for Sunday 
 	
-	var textAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n\nConfirmo a Aula demonstrativa " + secondPart + $("#nameSon").val() + " para " + days[x] + " dia "  + newDate + " às "
-						  + $("#scheduleHour").val() + ".\nNo endereço Rua Rio Purús, 500, N. Senhora das Graças (Vieiralves ao lado do CCAA).\n" +
+	var textAgendamento = "Olá " + firstPart + $("#nameParent").val() + " tudo bem?\n\nConfirmo a Aula demonstrativa " + secondPart + $("#nameSon").val() + " para " + days[x] + " dia "  + newDate + " de "
+						  + $('#scheduleHour').val() + " às "+ finaladd + ".\nNo endereço Rua Rio Purús, 500, N. Senhora das Graças (Vieiralves ao lado do CCAA).\n" +
 						  "Qualquer dúvida entrar em contato com a escola nos números: 3877-9798, 98404-7475, 98405-2317\n\n" + thanksEmployee + "\n\n" + $("#nameEmployee").val();
 
 	if (textType == "matricula") {
